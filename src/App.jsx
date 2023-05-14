@@ -58,6 +58,9 @@ function App() {
 	}, [searchValue, currentUser]);
 
 	const postData = async (Movie) => {
+		if(!currentUser){
+			alert("Please login to add to favourites");
+		}else{
 		await addDoc(collection(db, "MovieCollection"), {
 			Poster: Movie.Poster,
 			Title: Movie.Title,
@@ -66,6 +69,7 @@ function App() {
 			imdbID: Movie.imdbID,
 			mail: currentUser.email
 		});
+	}
 	}
 	const addFavouriteMovie = (Movie) => {
 		postData(Movie);
